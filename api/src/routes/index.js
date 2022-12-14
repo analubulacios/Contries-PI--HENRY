@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const countryRoutes = require ('./CountryR.js');
-//const activityRoutes = require ('./ActivityR.js');
+const activityRoutes = require ('./ActivityR.js');
 
 
 
@@ -14,7 +14,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use('/countries', countryRoutes); 
-//router.use('/activities', activityRoutes);
+router.use('/activities', activityRoutes);
 
 
 

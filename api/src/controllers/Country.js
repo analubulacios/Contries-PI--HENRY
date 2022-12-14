@@ -14,7 +14,7 @@ const bdinfo = apiInfo.map(async (e)=> {
         where: {
             name : e.name.common,
             id: e.cca3,
-            capital:e.capital ? e.capital : null,
+            capital:e.capital ? e.capital[0] : " Capital not found ",
             flags: e.flags ?  e.flags : null,
             continent: e.continents[0],
             subRegion: e.subregion ? e.subregion : 'N/A',
@@ -37,7 +37,6 @@ try {
     if (records < 250) {
        allCountries = await getApiInfo()
     } 
-
     const name = req.query.name;
     if (name){
       allCountries = await Country.findAll({
@@ -46,10 +45,13 @@ try {
                 [Op.iLike]:`%${name}%`
             },
         },
-        include: {
-            model:Activity 
-        } // agregar atributes
-    })
+        include: [{
+          model: Activity,
+          
+          through: { attributes: [] }
+        }]
+      })
+   
     if (allCountries.length === 0) {
         return res.status(404)
         .json({statusText:"No se encuentran países con ese nombre"})
@@ -59,8 +61,7 @@ try {
       allCountries = await Country.findAll({
         include: {
             model:Activity, 
-        }
-        // agregar atributes 
+        }       
       })
       return res.json(allCountries)
    }
@@ -68,21 +69,21 @@ try {
 } catch (error) {
     res.status(400)
     .json(error);
-}
+  }
 };
 
-async function getCountryId(req, res) {
+const  getCountryId = async (req, res) => {
     try {
       const idPais = req.params.idPais.toUpperCase();
       // console.log(idPais)
       const country = await Country.findByPk(
         idPais, 
-        {
-        include: {
-        model: Activity,
-        },
-
-  });
+        {include: [{
+          model: Activity,
+          
+          through: { attributes: [] }
+        }]
+      })
      if (country === null) {
         return res.status(404).json({statusText:"No se encuentran países con ese id"})
      }
@@ -91,5 +92,6 @@ async function getCountryId(req, res) {
     } catch (error) {
       res.status(400).json(error);
     }
-  }
+  };
+
 module.exports = {  getAllCountries , getCountryId  };

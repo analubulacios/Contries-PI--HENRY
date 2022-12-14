@@ -23,8 +23,9 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     capital: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull:true, // consultar porque hay paises que no tienen capital!!! 
+      type: DataTypes.STRING,
+      allowNull:false,
+       // consultar porque hay paises que no tienen capital!!! 
     },
     subRegion: {
       type: DataTypes.STRING,
