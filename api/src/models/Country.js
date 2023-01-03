@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     flags: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     continent: {
@@ -25,7 +25,6 @@ module.exports = (sequelize) => {
     capital: {
       type: DataTypes.STRING,
       allowNull:false,
-       // consultar porque hay paises que no tienen capital!!! 
     },
     subRegion: {
       type: DataTypes.STRING,
@@ -40,6 +39,6 @@ module.exports = (sequelize) => {
       allowNull: true
     }
   },{
-    timestamps: true,
+    timestamps: false, // cambie a false 
   } );
 };

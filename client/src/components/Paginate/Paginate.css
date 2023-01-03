@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin: 2rem 0;
+    transition-duration: 0.3s;
+}
+
+.bton {
+    border: none;
+    background-color: white;
+    border-radius: 16px;
+    padding: .2em .7em 0 .7em;
+    cursor: pointer;
+    text-decoration: none;
+}

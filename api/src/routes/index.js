@@ -23,5 +23,3 @@ module.exports = router;
 
 
 
-//porque aync await ?
-// como no sabemos cuanto demorara la respuesta tengo que avisarle que tiene que esperar la resppuesta antes de cargarla en la variable APIURL

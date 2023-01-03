@@ -1,0 +1,16 @@
+.CardContainer {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    margin: 12px;
+
+}
+
+.CardContainer img {
+    width: 100%;
+}
+

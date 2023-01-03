@@ -2,7 +2,7 @@ const { Sequelize , Op } = require ('sequelize');
 const axios = require ('axios');
 const { Country, Activity } = require ('../db');
 
-// llamo con el endpoint de la api toda la info que necesito para cargarla en mi base de datos.
+
 
 
 const getApiInfo = async () => {
@@ -14,13 +14,13 @@ const bdinfo = apiInfo.map(async (e)=> {
         where: {
             name : e.name.common,
             id: e.cca3,
-            capital:e.capital ? e.capital[0] : " Capital not found ",
-            flags: e.flags ?  e.flags : null,
+            flags: e.flags ? e.flags[0] : 'N/A',
+            capital:e.capital ? e.capital[0] : 'N/A',
             continent: e.continents[0],
             subRegion: e.subregion ? e.subregion : 'N/A',
             area: e.area.toString(),
             population: e.population  
-          }
+          } 
     })
 })
 
@@ -59,9 +59,11 @@ try {
         return res.json(allCountries);
     } else {
       allCountries = await Country.findAll({
-        include: {
-            model:Activity, 
-        }       
+        include: [{
+          model: Activity,
+          
+          through: { attributes: [] }
+        }]
       })
       return res.json(allCountries)
    }
