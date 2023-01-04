@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCountries, addActivity } from '../../../redux/actions/index';
 import { useDispatch, useSelector } from "react-redux";
+import NavBar from "../../NavBar/NavBar";
 
 
 export default function ActivityForm (){
@@ -15,7 +16,7 @@ export default function ActivityForm (){
     });
 	
     useEffect(()=>{
-        dispatch(getCountries()) 
+        dispatch(getCountries()) //cuando renderiz entran los paises 
     },[dispatch])
     
     const[ selected, setSelected ]= useState([])
@@ -25,8 +26,7 @@ export default function ActivityForm (){
 		difficulty: '',
 		duration: '',
 		season: '',
-		countries: [],
-	})
+		countries: [],})
 
     useEffect(() => {
 		setErrors(validate(activity))
@@ -38,13 +38,13 @@ export default function ActivityForm (){
 		if (!activity.name) {
 			errors.name = 'Name is required'
 		}
-        if(activity.duration > 24 || activity.duration < 1 ){
+    if(activity.duration > 24 || activity.duration < 1 ){
             errors.duration = 'Maximum duration from 1 to 24 hours'
 		}
-        if(activity.difficulty > 5 || activity.difficulty < 1){
+    if(activity.difficulty > 5 || activity.difficulty < 1){
             errors.difficulty = 'Maximum difficulty from 1 to 5'
 		}
-		if (!activity.seasons.length) {
+		if (!activity.season.length) {
 			errors.season = 'You must select at least one season'
 		}
 		if (!activity.countries.length) {
@@ -57,14 +57,12 @@ export default function ActivityForm (){
         setActivity({
           ...activity,
           [e.target.name]: e.target.value
-        });
-        if (!errors) {
-          setErrors(validate({
+        })
+      setErrors(validate({
             ...activity,
             [e.target.name]: e.target.value
           }))
-        }
-      };
+    };
 
     const handleSeasons = (e) => {
         if (e.target.value !== 'Select' && !activity.season.includes(e.target.value)) {
@@ -72,14 +70,12 @@ export default function ActivityForm (){
             ...activity,
             season: e.target.value
           })
-          if (!errors) {
+        }
             setErrors(validate({
               ...activity,
               season: e.target.value
             }))
-          }
         }
-      };
 
     const handleCountries = (e) => {
         if (e.target.value !== 'Select' && !activity.countries.includes(e.target.value)) {
@@ -87,26 +83,23 @@ export default function ActivityForm (){
             ...activity,
             countries: [...activity.countries, e.target.value]
           })
-          if (!errors) {
-            setErrors(validate({
+        }
+        if (!selected.includes(e.target.value)){ setSelected(c => [...c,e.target.value])} //agregado miercoles
+        setErrors(validate({
               ...activity,
               countries: [...activity.countries, e.target.value]
             }))
-          }
-        }
       };
 
-    const deleteCountry = (e) => {
+    const deleteCountry = (c) => {
         setActivity({
           ...activity,
-          countries: activity.countries.filter(country => country !== e.target.value)
+          countries: activity.countries.filter(country => country !== c)
         })
-        if (!errors.firstTry) {
-          setErrors(validate({
+        setErrors(validate({
             ...activity,
-            countries: activity.countries.filter(country => country !== e.target.value)
+            countries: activity.countries.filter(country => country !== c)
           }))
-        }
       };
     
     const handleSubmit = async (e) => {
@@ -120,7 +113,8 @@ export default function ActivityForm (){
 	};
          
     return (
-
+        <>
+        <NavBar/>
         <div>
             <h1>CREATE NEW ACTIVITY</h1>
                 <form 
@@ -130,7 +124,7 @@ export default function ActivityForm (){
                             <div>
 								<label>Name:</label>
 									<input 
-                                    autocomplete='off' 
+                                    autoComplete='off' 
                                     onChange={e=>handleChange(e)} 
                                     type='text' 
                                     name='name' 
@@ -154,7 +148,7 @@ export default function ActivityForm (){
                                 <label>Select season:</label>
                                     <select
                                     name="season"
-                                    value={activity.season}
+                              
                                     onChange={e => handleSeasons(e)}
                                     >
                                         <option value="Autumn">Autumn</option>
@@ -179,12 +173,12 @@ export default function ActivityForm (){
                             <div>
                             <label>Select:</label>
                             <select 
-                            value={selected} 
-                            onChange={e => [handleCountries(e), setSelected(e)]}>
-                                        <option>Countries:</option>
+                               onChange={e => handleCountries(e)}>
+                                        <option>Countries</option>
                                         {countriesList?.map(c => {
                                             return (
-                                        <option key={c.name}>
+                                        <option value={c.name} 
+                                        key={c.name}>
                                              {c.name}
                                         </option>
                                             )
@@ -198,19 +192,20 @@ export default function ActivityForm (){
                                      return (
                                          <div key={country}>
                                             <p>{country}</p>
-                                                <button onClick={e => { deleteCountry(e) }} value={country}>Delete Country</button>
+                                                <button type='button' onClick={e => { deleteCountry(country) }}>Delete Country</button>
                                         </div>
                                     )
                                 })}
                             </div>
                             <div>
-                                {/* {!errors.name ||
-                                !errors.activity ||
-                                !errors.duration ||
-                                !errors.season ||
-                                !errors.countries ?
-                                     <button >Add Activity</button>
-                                         : <button onClick={e => handleCheckErrors(e)}>Add Activity</button>} */}
+                            <button
+                                type='submit'            
+                                disabled={errors.name ||
+                                errors.activity ||
+                                errors.duration ||
+                                errors.season ||
+                                errors.countries } >Add Activity</button>
+  
                              </div>
                             
                     </div>
@@ -220,11 +215,10 @@ export default function ActivityForm (){
             </form>
 
         </div>
+      </>
 
-
-    )
-
-};
+      )
+ }
 
 
 

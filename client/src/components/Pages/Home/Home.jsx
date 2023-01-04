@@ -7,6 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import Paginate from '../../Paginate/Paginate';
 import FilterOrder from '../../FilterOrder/FilterOrder';
 import './Home.css';
+import NavBar from '../../NavBar/NavBar';
 
 
 export default function Home (){
@@ -30,6 +31,8 @@ export default function Home (){
    
     const currentCountries = allCountries.slice(currentPage == 1 ? 0 :indexOfFirstCountries, search === false && currentPage == 1 ? 9 :indexOfLastCountries);
     return (
+        <>
+        <NavBar/>
         <div>
             <div>
                 <SearchBar/>
@@ -52,6 +55,7 @@ export default function Home (){
                 <Paginate/>    
             </div>
         </div>
+        </>
     );       
 };
 

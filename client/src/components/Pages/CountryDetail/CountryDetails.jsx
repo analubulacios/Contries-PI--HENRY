@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCountrydetail } from "../../../redux/actions";
+import NavBar from "../../NavBar/NavBar";
+
 //import la Activity asociada al paisid //
 
 export default function CountryDetail () {
@@ -16,7 +18,9 @@ export default function CountryDetail () {
     }, [idPais]);
 
     return (
-        <div>
+        <>
+        <NavBar/>
+        <div>            
         {
         Object.keys(countryDetail).length  > 0 && 
             <div className='countryContainer'>
@@ -32,7 +36,7 @@ export default function CountryDetail () {
             </div>
         }
         </div>
-        
+        </>
       );
 };
 

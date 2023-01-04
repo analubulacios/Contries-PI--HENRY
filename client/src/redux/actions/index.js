@@ -83,7 +83,7 @@ export function addActivity(payload){
   return async function (dispatch){
       try {
           await axios.post('http://localhost:3001/activities', payload)
-          alert('Activity added successfully!')
+          // alert('Activity added successfully!')
           return dispatch({
               type: ADD_ACTIVITY,
               payload: payload
@@ -92,7 +92,8 @@ export function addActivity(payload){
         console.log(error);
       }
   }          
+
 }
 
-
+  //export function getActivities()// esto es para filtrar por actividades
 

@@ -10,12 +10,10 @@ function App() {
   return (
     <Switch>
       <Route exact path='/' component={LandingPage}/>
-      <Route path='/'>
-        <NavBar/>
-      <Route path='/home' component={Home}/>
+      <Route exact path='/home' component={Home}/>
       <Route exact path='/country/:idPais' component={CountryDetail}/>
       <Route exact path='/activity' component={ActivityForm}/>
-      </Route>
+      {/* <Route path ='*' /> */}
 	  </Switch>
   )
 };

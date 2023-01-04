@@ -22,7 +22,7 @@ const initialState = {
     indexOfLastCountries: 10,
     indexOfFirstCountries: 0,
     pages: 1,
-    activities: {},
+    activity: {},
 
   };
   
@@ -134,7 +134,7 @@ const rootReducer = (state = initialState, action) => {
         case ADD_ACTIVITY:
           return {
             ...state,
-            activities: action.payload,
+            activity: action.payload,
           }
                               
         default:

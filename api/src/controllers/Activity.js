@@ -20,12 +20,15 @@ const { countriesname, name, difficulty, duration, season} = req.body;
                     },
                 },
             })
-        crecords.push(countryBydb); 
+        //crecords.push(countryBydb);
+        if(countryBydb){
+            await newActivity.addCountry(c) 
+        }
         }
         
-        for (let c of crecords ) {
-            await newActivity.addCountry(c) 
-            };
+        // for (let c of crecords ) {
+        //     await newActivity.addCountry(c) 
+        //     };
         
         const recordAct = await Activity.findByPk( 
             newActivity.id, {
@@ -36,11 +39,11 @@ const { countriesname, name, difficulty, duration, season} = req.body;
               }]
             })
     
-        .then(newActivity => newActivity.toJSON())
+        // .then(newActivity => newActivity.toJSON())
         res.json(recordAct);
 
     }catch(error){
-        res.status(400).send(error.message);
+        res.status(400).json(error);
     }
 };
 
