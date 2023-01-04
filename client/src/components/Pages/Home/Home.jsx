@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountries }  from '../../../redux/actions/index';
 import CountryCard from '../../CountryCard/CountryCard';
-import  SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import Paginate from '../../Paginate/Paginate';
 import FilterOrder from '../../FilterOrder/FilterOrder';
 import './Home.css';

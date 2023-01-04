@@ -6,6 +6,10 @@ import {
     GET_COUNTRIES_BY_NAME,
     GET_COUNTRYDETAIL,
     FILTER_BY_CONTINENT,
+    FILTER_BY_ACTIVITY,
+    ORDER_BY_NAME,
+    ORDER_BY_POPULATION,
+    ADD_ACTIVITY,
 } from '../constants/index.js';
 
 
@@ -54,6 +58,41 @@ export function filterByContinent(payload) {
   };
 };
 
+export function filterByActivity(payload) {
+  return {
+    type : FILTER_BY_ACTIVITY,
+    payload: payload, 
+  };
+};
+
+export function orderByName(payload){
+  return {
+    type: ORDER_BY_NAME,
+    payload: payload,
+  };
+};
+
+export function orderbyPopulation (payload){
+  return {
+    type: ORDER_BY_POPULATION,
+    payload: payload,
+  };
+};
+
+export function addActivity(payload){
+  return async function (dispatch){
+      try {
+          await axios.post('http://localhost:3001/activities', payload)
+          alert('Activity added successfully!')
+          return dispatch({
+              type: ADD_ACTIVITY,
+              payload: payload
+          })
+      } catch (error) {
+        console.log(error);
+      }
+  }          
+}
 
 
 
