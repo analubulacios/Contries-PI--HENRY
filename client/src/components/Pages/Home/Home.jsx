@@ -34,10 +34,8 @@ export default function Home (){
         <>
         <NavBar/>
         <div>
-            <div>
+            <div className='conteiner_SearchFilter'>
                 <SearchBar/>
-            </div>
-            <div>
                 <FilterOrder/>
             </div>
             <div className='CardsCountries'>

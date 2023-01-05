@@ -1,15 +1,16 @@
 import axios from 'axios';
 
 import {
-    GET_COUNTRIES,
-    SET_PAGINATION,
-    GET_COUNTRIES_BY_NAME,
-    GET_COUNTRYDETAIL,
-    FILTER_BY_CONTINENT,
-    FILTER_BY_ACTIVITY,
-    ORDER_BY_NAME,
-    ORDER_BY_POPULATION,
-    ADD_ACTIVITY,
+  GET_COUNTRIES,
+  SET_PAGINATION,
+  GET_COUNTRIES_BY_NAME,
+  GET_COUNTRYDETAIL,
+  FILTER_BY_CONTINENT,
+  FILTER_BY_ACTIVITY,
+  ORDER_BY_NAME,
+  ORDER_BY_POPULATION,
+  ADD_ACTIVITY,
+  
 } from '../constants/index.js';
 
 
@@ -82,11 +83,12 @@ export function orderbyPopulation (payload){
 export function addActivity(payload){
   return async function (dispatch){
       try {
-          await axios.post('http://localhost:3001/activities', payload)
-          // alert('Activity added successfully!')
+        
+         const post = await axios.post('http://localhost:3001/activities', payload)
+         
           return dispatch({
               type: ADD_ACTIVITY,
-              payload: payload
+              payload: post,
           })
       } catch (error) {
         console.log(error);
@@ -95,5 +97,6 @@ export function addActivity(payload){
 
 }
 
-  //export function getActivities()// esto es para filtrar por actividades
 
+
+ 

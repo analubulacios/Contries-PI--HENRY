@@ -8,6 +8,7 @@ import {
     ORDER_BY_NAME,
     ORDER_BY_POPULATION,
     ADD_ACTIVITY,
+ 
   } from '../constants/index.js';
 
 
@@ -22,7 +23,7 @@ const initialState = {
     indexOfLastCountries: 10,
     indexOfFirstCountries: 0,
     pages: 1,
-    activity: {},
+    activities: [],
 
   };
   
@@ -35,7 +36,16 @@ const rootReducer = (state = initialState, action) => {
           allCountries:action.payload,
           pages: Math.ceil(action.payload.length/countriesPerPage),
           searchCountries: false,
+          activities: [...new Set(action.payload.filter((c)=>c.activities !== undefined).map((e)=>e.activities).flat().map((el)=>el.name).sort())],
         }; 
+
+        //new set => devuelve un nuevo set sin repeticiones... y lo pongo dentro de un spread operator y corchetes para meterlo en un array, setearlo y volver a convertirlo en un array. 
+        // filter me traigo los paises que tienen actividades
+        // a esos paises que tienen actividades , me guardo las actividades(ya filtradas)
+        //flat acomoda en un array mayor los sub array concatenados.
+        //queda un array unico al que solo le tomo la prop. name. 
+
+
       case SET_PAGINATION:
         return {
           ...state,
@@ -67,14 +77,16 @@ const rootReducer = (state = initialState, action) => {
           pages:Math.ceil(continentFiltered.length / countriesPerPage),
           currentPage: 1,
         }
-      // case FILTER_BY_ACTIVITY:
-      //   let countriesAll2 = state.allCountries;// consultar !!!
-      //   const activityFiltered = action.payload === '0'? countriesAll2.filter(c => 
-      //     c.activities.some(a => a.activity_id === action.values.activity)): countriesAll2.filter(c => !c.activities.some(a => a.activity_id === action.values.activity))
-      //   return {
-      //     ...state,
-      //     countries: action.payload === '0'? state.countries : activityFiltered
-      //   }
+      case FILTER_BY_ACTIVITY:
+        
+        const allCountry = state.allCountries;
+        const activitiesFiltered = action.payload === '0' ? allCountry: allCountry.filter(e => e.activities && e.activities.some(a=> a.name === action.payload))
+        return{
+           ...state,
+            countries: activitiesFiltered,
+            pages:Math.ceil(activitiesFiltered.length / countriesPerPage),
+            currentPage: 1,
+        }
 
       case ORDER_BY_NAME:
         let countriesSortName = [...state.countries];
@@ -134,8 +146,9 @@ const rootReducer = (state = initialState, action) => {
         case ADD_ACTIVITY:
           return {
             ...state,
-            activity: action.payload,
+       
           }
+       
                               
         default:
           return state;

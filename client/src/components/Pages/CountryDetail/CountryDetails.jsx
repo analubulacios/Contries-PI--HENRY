@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getCountrydetail } from "../../../redux/actions";
 import NavBar from "../../NavBar/NavBar";
 
-//import la Activity asociada al paisid //
+
 
 export default function CountryDetail () {
 
@@ -12,9 +12,12 @@ export default function CountryDetail () {
     const dispatch = useDispatch();
 
     let {idPais} = useParams();
+
+    const activity = useSelector((state)=> state.activities)    
+    
     useEffect(()=>{
         dispatch(getCountrydetail(idPais));
-        
+     
     }, [idPais]);
 
     return (
@@ -22,8 +25,8 @@ export default function CountryDetail () {
         <NavBar/>
         <div>            
         {
-        Object.keys(countryDetail).length  > 0 && 
-            <div className='countryContainer'>
+        Object.keys(countryDetail).length  > 0 &&
+            (<div className='countryContainer'>
                 <h1>{countryDetail.name}</h1>
                 <h3>{countryDetail.id}</h3>
                     <div className='imgContainer'>
@@ -33,8 +36,36 @@ export default function CountryDetail () {
                         <h5>Subregion:{countryDetail.subRegion}</h5>
                         <h5>Area:{countryDetail.area} Km2</h5>
                         <h5>Population:{countryDetail.population} Hab. </h5>          
-            </div>
+            </div>)
+            
         }
+        </div>
+        <div>
+            {
+            
+             countryDetail.activities ? (
+                <div>
+                    <h2>Activities:</h2>
+                    {countryDetail.activities.map(e => (
+                        <div>
+                            <h3>Name: {e.name}</h3>
+                            <h3>Difficulty: {e.difficulty}</h3>
+                            <h3>Duration: {e.duration}</h3>
+                            <h3>Season: {e.season}</h3>
+                           
+                        </div>
+                      ))
+                    }
+                </div>    
+                ):
+                (<div>
+                    <p> No activities linked...  </p>
+
+                </div>)
+             
+                  
+            }
+
         </div>
         </>
       );

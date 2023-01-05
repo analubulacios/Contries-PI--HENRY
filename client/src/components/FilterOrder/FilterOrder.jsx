@@ -1,25 +1,31 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import { filterByActivity, filterByContinent, orderByName, orderbyPopulation } from '../../redux/actions';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { filterByActivity, filterByContinent,  getCountries, orderByName, orderbyPopulation } from '../../redux/actions';
+import './FilterOrder.css';
 
 
 export default function FilterOrder (){
 
-
-	const [order, setOrder]= useState('');
+	
+	
 	const dispatch = useDispatch();
+	const activities = useSelector(state => state.activities);
+	
+	useEffect(()=>{
+        dispatch(getCountries()) 
+    },[dispatch])
 
+	
 	function handleFilterContinent(e){
 		e.preventDefault();
 		dispatch(filterByContinent(e.target.value))
 	};
 
-	// function handleFilterActivity(e) {
-	// 	e.preventDefault();
-	// 	dispatch(filterByActivity(e.target.value))
-	// };
+	function handleFilterActivity(e) {
+		e.preventDefault();
+		dispatch(filterByActivity(e.target.value))
+	};
 	
 	function handleSortName(e){
 		e.preventDefault();
@@ -32,29 +38,27 @@ export default function FilterOrder (){
 	};
 
     return(
-        <div>
-            <form>
-           		 <div>				
-					<select onChange={e => handleFilterContinent(e)}>
-						<option value='0'>Filter by Continent</option>
-						<option value='Africa'>Africa</option>
-						<option value='Antarctica'>Antarctica</option>
-						<option value='Asia'>Asia</option>
-						<option value='Europe'>Europe</option>
-						<option value='North America'>North America</option>
-						<option value='South America'>South America</option>
-						<option value='Oceania'>Oceania</option>
-					</select>
-				</div>
-				{/* <div>				
-				<select onChange={handleFilterActivity(e)}>
+        <div className='FilterOrder'>
+            
+				<select onChange={e => handleFilterContinent(e)}>
+							<option value='0'>Filter by Continent</option>
+							<option value='Africa'>Africa</option>
+							<option value='Antarctica'>Antarctica</option>
+							<option value='Asia'>Asia</option>
+							<option value='Europe'>Europe</option>
+							<option value='North America'>North America</option>
+							<option value='South America'>South America</option>
+							<option value='Oceania'>Oceania</option>
+				</select>					
+					
+								
+				<select onChange={e=> handleFilterActivity(e)}>
 					<option value='0'>Filter by Activity</option>
 						{activities?.map(e => {
-							return <option key={e.activity_id} value={e.activity_id}>{e.name}</option>
+							return <option key={e} value={e}>{e}</option>
 						})}
 				</select> 
-				</div> */}
-				<div>
+				
 					<select onChange={e=> handleSortName(e)}>
 						<option value='0'>Order by name</option>
 						<option value='A-Z'>A to Z</option>
@@ -65,8 +69,7 @@ export default function FilterOrder (){
 						<option value='Min-Max'>Population Asc</option>
 						<option value='Max-Min'>Population Des</option>
 					</select>
-				</div>
-    	    </form>
+				
     	</div>
     )
 }
