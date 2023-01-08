@@ -147,7 +147,7 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
        
-          }
+          }                                  
        
                               
         default:
