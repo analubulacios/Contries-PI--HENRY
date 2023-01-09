@@ -1,0 +1,19 @@
+.FilterOrder {
+    display: flex;
+    align-items: center;
+}
+.FilterOrder > select{
+    margin: 10px 0;
+    
+}
+
+.filter{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.order{
+    display: flex;
+    flex-direction: column;
+}

@@ -33,12 +33,12 @@ export function setPagination(payload) {
 
 export function getCountryByName(name) {
   return async (dispatch) => {
-    try {
+   try {
       const json = await axios.get(
         `http://localhost:3001/countries?name=${name}`);
       dispatch({ type: GET_COUNTRIES_BY_NAME, payload: json.data });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: GET_COUNTRIES_BY_NAME, payload:[], error});
     }
   };
 };

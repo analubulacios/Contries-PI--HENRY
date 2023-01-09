@@ -13,16 +13,14 @@ export default function SearchBar() {
 
     const onClickHandler = (e) => {
         e.preventDefault();
-        input.length > 0 && dispatch(getCountryByName(input));
+        input.length > 0 && dispatch(getCountryByName(input))
+        setInput('');
+     
     };
     const inputHandler = (e) => {
+        e.preventDefault();
         setInput(e.target.value);
     };
-
-    const homeHandler = () => {
-        dispatch(getCountries());
-    };
-
 
     return (
         <div>
@@ -43,9 +41,6 @@ export default function SearchBar() {
                         </button>
                     </div>
                 </form>
-                <button className='srctBtn' onClick={() => homeHandler()}>
-                    Reset
-                </button>
             </div>
         </div>
     )

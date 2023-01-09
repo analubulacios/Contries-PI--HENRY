@@ -9,7 +9,7 @@ import {
     ORDER_BY_POPULATION,
     ADD_ACTIVITY,
  
-  } from '../constants/index.js';
+} from '../constants/index.js';
 
 
 const countriesPerPage = 10;
@@ -24,8 +24,9 @@ const initialState = {
     indexOfFirstCountries: 0,
     pages: 1,
     activities: [],
+    error: {},
 
-  };
+};
   
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -53,21 +54,28 @@ const rootReducer = (state = initialState, action) => {
           indexOfFirstCountries: (action.payload - 1 ) * countriesPerPage ,
           indexOfLastCountries: action.payload * countriesPerPage,
         };
+
       case GET_COUNTRIES_BY_NAME:
+        //aca va una condicion en la que si el objeto que llega es != voy dejar todo mi estado exactamente = y a error lo cambio a 1. 
+
         return {
           ...state,
           searchCountries: true,
           countries: action.payload,
           pages: Math.ceil(action.payload.length/countriesPerPage),
-          currentPage: 1,
-      
-        };
+          currentPage: 1,   
+          error: action.error ? {
+            status: action.error.response.status,
+                    message: action.error.response.message
+                } : {},
+          };
 
       case GET_COUNTRYDETAIL:
         return {
           ...state,
           countryDetail: action.payload,
-        }
+        };
+
       case FILTER_BY_CONTINENT:
         let countriesAll = state.allCountries;
         const continentFiltered = action.payload ==='0'? countriesAll: countriesAll.filter(c=> c.continent === action.payload)
@@ -76,9 +84,9 @@ const rootReducer = (state = initialState, action) => {
           countries: continentFiltered,
           pages:Math.ceil(continentFiltered.length / countriesPerPage),
           currentPage: 1,
-        }
+        };
+
       case FILTER_BY_ACTIVITY:
-        
         const allCountry = state.allCountries;
         const activitiesFiltered = action.payload === '0' ? allCountry: allCountry.filter(e => e.activities && e.activities.some(a=> a.name === action.payload))
         return{
@@ -86,7 +94,7 @@ const rootReducer = (state = initialState, action) => {
             countries: activitiesFiltered,
             pages:Math.ceil(activitiesFiltered.length / countriesPerPage),
             currentPage: 1,
-        }
+        };
 
       case ORDER_BY_NAME:
         let countriesSortName = [...state.countries];
@@ -114,7 +122,7 @@ const rootReducer = (state = initialState, action) => {
             countries : sortName,
               pages:Math.ceil(sortName.length / countriesPerPage),
               currentPage: 1,
-          }
+          };
 
       case ORDER_BY_POPULATION:
         let countriesSortPop = [...state.countries];
@@ -148,8 +156,6 @@ const rootReducer = (state = initialState, action) => {
             ...state,
        
           }                                  
-       
-                              
         default:
           return state;
       }

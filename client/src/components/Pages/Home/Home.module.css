@@ -1,0 +1,49 @@
+.home {
+    height: calc(100vh - 64px) !important;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    background-color: #00000040;
+    
+}
+
+.ContainerNavBar{
+    display: flex;
+    
+} 
+
+.ContainerSearchFilter{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    
+}
+
+.CardsCountries {
+    height: auto;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(200px,300px));
+    max-width: 1270px;
+    margin: 40px auto;
+
+}
+
+.error{
+    height:10vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size: larger;
+    font-weight: 700;
+    color: #ffb703 ;
+    background-color: #00000040;
+    border-radius:30px;
+
+}

@@ -30,9 +30,10 @@ export default function Paginate (){
         <div className='container'>
             <button className='bton' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(1))} >FIRST</button>
             <button className='bton' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(currentPage - 1))}>PREV</button>
-            {page.map((e) => (
+            {page.map((e,index) => (
         <>
             <button
+            key={index}
             className={
               currentPage === e
                 ? "button-principal"

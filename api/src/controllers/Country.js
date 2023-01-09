@@ -77,7 +77,6 @@ try {
 const  getCountryId = async (req, res) => {
     try {
       const idPais = req.params.idPais.toUpperCase();
-      // console.log(idPais)
       const country = await Country.findByPk(
         idPais, 
         {include: [{

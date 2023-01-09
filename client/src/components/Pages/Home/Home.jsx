@@ -6,8 +6,9 @@ import CountryCard from '../../CountryCard/CountryCard';
 import SearchBar from '../SearchBar/SearchBar';
 import Paginate from '../../Paginate/Paginate';
 import FilterOrder from '../../FilterOrder/FilterOrder';
-import './Home.css';
+import style from './Home.module.css';
 import NavBar from '../../NavBar/NavBar';
+
 
 
 export default function Home (){
@@ -32,26 +33,30 @@ export default function Home (){
     const currentCountries = allCountries.slice(currentPage == 1 ? 0 :indexOfFirstCountries, search === false && currentPage == 1 ? 9 :indexOfLastCountries);
     return (
         <>
-        <NavBar/>
-        <div>
-            <div className='conteiner_SearchFilter'>
-                <SearchBar/>
-                <FilterOrder/>
+        <div className={style.home}>
+            <div className={style.ContainerNavbar}>
+                <NavBar/>
             </div>
-            <div className='CardsCountries'>
-            {
-            currentCountries.length > 0 ? currentCountries.map((c) => (<CountryCard
-            idPais={c.id}
-            key = {c.id}
-            urlImg={c.flags}
-            name={c.name}
-            continent={c.continent}/>))
-            : <p>Loading...</p>
-            }
+            <div className={style.ContainerSearchFilter}>
+                <SearchBar/>   
+                <FilterOrder/>                   
             </div>
+            
+                <div className={style.CardsCountries}>  
+                {
+                currentCountries.length > 0 ? currentCountries.map((c) => (<CountryCard
+                idPais={c.id}
+                key = {c.id}
+                urlImg={c.flags}
+                name={c.name}
+                continent={c.continent}/>))
+                : <span className={style.error}>ERROR: COUNTRY NOT FOUND</span>
+                }
+                </div>
+           
             <div>
                 <Paginate/>    
-            </div>
+            </div>    
         </div>
         </>
     );       

@@ -36,24 +36,28 @@ export default function ActivityForm (){
 		if (!activity.name) {
 			errors.name = 'Name is required'
 		}
-    if(activity.duration > 24 || activity.duration < 1 ){
+    else if (!activity.duration) {
+      errors.duration = 'Duration is required'
+    }
+    
+    else if ( activity.duration > 24 || activity.duration < 1 ){
             errors.duration = 'Maximum duration from 1 to 24 hours'
 		}
-    if(activity.difficulty > 5 || activity.difficulty < 1){
+    else if (!activity.difficulty && activity.difficulty > 5 || activity.difficulty < 1){
             errors.difficulty = 'Maximum difficulty from 1 to 5'
 		}
-		if (!activity.season) {
+		else if (!activity.season) {
 			errors.season = 'You must select at least one season'
 		}
-		if (!activity.countries.length) {
+		else if (!activity.countries.length) {
 			errors.countries = 'You must select at least one country'
 		}
 		return errors;
     };
 
-    useEffect(() => {
-		setErrors(validate(activity))
-	  }, [ activity ])
+    // useEffect(() => {
+		// setErrors(validate(activity))
+	  // }, [ activity ])
 	
     const handleChange = (e) => {
         setActivity({
@@ -86,7 +90,7 @@ export default function ActivityForm (){
             countries: [...activity.countries, e.target.value]
           })
         }
-        if (!selected.includes(e.target.value)){ setSelected(c => [...c,e.target.value])} //agregado miercoles
+        if (!selected.includes(e.target.value)){ setSelected(c => [...c,e.target.value])} 
         setErrors(validate({
               ...activity,
               countries: [...activity.countries, e.target.value]
@@ -98,17 +102,17 @@ export default function ActivityForm (){
           ...activity,
           countries: activity.countries.filter(country => country !== c)
         })
-        setErrors(validate({
-            ...activity,
-            countries: activity.countries.filter(country => country !== c)
-          }))
+        // setErrors(validate({
+        //     ...activity,
+        //     countries: activity.countries.filter(country => country !== c)
+        //   }))
       };
     
     const handleSubmit = (e) => {
 		  e.preventDefault()
 		  dispatch(addActivity(activity))
       alert('Activity added successfully!')
-      console.log('chinguiro', activity)
+      // console.log('chinguiro', activity)
         setActivity({
             name: '',
             difficulty: '',
@@ -137,7 +141,8 @@ export default function ActivityForm (){
                            name='name' 
                            value={activity.name}
                            placeholder='Activity Name' />
-                           {errors.name && (<p>{errors.name}</p>)}
+                           {errors.name && <div>{errors.name}</div> }
+                        
                     </div>         
                             
                             <div>
@@ -149,7 +154,7 @@ export default function ActivityForm (){
                                     onChange={e => handleChange(e)}
                                     autoComplete='off'
                                     placeholder='Duration Format: 24hs' />
-                                    {errors.duration && (<p>{errors.duration}</p>)}
+                                    {errors.duration && <div>{errors.duration}</div>}
                            </div>
                            <div>
                                 <label>Select season:</label>
@@ -163,7 +168,7 @@ export default function ActivityForm (){
                                         <option value="Spring">Spring</option>
                                         <option value="Summer">Summer</option>
                                     </select>
-                                    {errors.season && (<p>{errors.season}</p>)}
+                                    {errors.season && <div>{errors.season}</div>}
                            </div>
                             <div>
                                 <label>Difficulty:</label>
@@ -175,7 +180,7 @@ export default function ActivityForm (){
                                     autoComplete='off'
                                     placeholder='Difficulty 1 to 5'
                                     />
-                                    {errors.difficulty && (<p>{errors.difficulty}</p>)}
+                                    {errors.difficulty && <div>{errors.difficulty}</div>}
                             </div>
                             <div>
                             <label>Select:</label>
@@ -185,11 +190,11 @@ export default function ActivityForm (){
                                 <option value={c.name}>{c.name}</option>
                             ))}
                         </select>
-                             {errors.countries && (<p>{errors.countries}</p>)}
+                             {errors.countries && <p>{errors.countries}</p>}
                             </div>
                             <div className="displayCountries">
                                 {activity.countries.map((country) => {
-                                 console.log(country)
+                                //  console.log(country)
                                      return (
                                          <div key={country}>
                                             <p>{country}</p>

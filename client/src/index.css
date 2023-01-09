@@ -1,17 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-image: url('../../client/src/img/pexels-valentin-antonucci-1275393.jpg'); 
-  margin: 100;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+  background-image: url('../../client/src/img/worldwideactivities.jpg'); 
+   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  width: 100vw;
-  height: 100%;
+  width: 90hv;
+  height: 90vh;
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+
+body,
+input{
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 17px;
+
 }
 
 code {
@@ -21,4 +33,11 @@ code {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
+
+:root{
+  --border-color:#023047 ;
+ 
+}
+

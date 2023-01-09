@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByActivity, filterByContinent,  getCountries, orderByName, orderbyPopulation } from '../../redux/actions';
-import './FilterOrder.css';
+import style from './FilterOrder.module.css';
 
 
 export default function FilterOrder (){
@@ -36,11 +36,18 @@ export default function FilterOrder (){
 		e.preventDefault();
 		dispatch(orderbyPopulation(e.target.value))
 	};
+	
+	function homeHandler () {
+		dispatch(getCountries())
+	};
+	
+	
 
     return(
-        <div className='FilterOrder'>
-            
-				<select onChange={e => handleFilterContinent(e)}>
+		
+        <div className={style.FilterOrder}>
+				<div className={style.filter}>
+					<select onChange={e => handleFilterContinent(e)}>
 							<option value='0'>Filter by Continent</option>
 							<option value='Africa'>Africa</option>
 							<option value='Antarctica'>Antarctica</option>
@@ -49,16 +56,15 @@ export default function FilterOrder (){
 							<option value='North America'>North America</option>
 							<option value='South America'>South America</option>
 							<option value='Oceania'>Oceania</option>
-				</select>					
-					
-								
-				<select onChange={e=> handleFilterActivity(e)}>
-					<option value='0'>Filter by Activity</option>
-						{activities?.map(e => {
+					</select>													
+					<select onChange={e=> handleFilterActivity(e)}>
+						<option value='0'>Filter by Activity</option>
+							{activities?.map(e => {
 							return <option key={e} value={e}>{e}</option>
-						})}
-				</select> 
-				
+							})}
+					</select> 
+				</div>
+				<div className={style.order}>
 					<select onChange={e=> handleSortName(e)}>
 						<option value='0'>Order by name</option>
 						<option value='A-Z'>A to Z</option>
@@ -69,6 +75,12 @@ export default function FilterOrder (){
 						<option value='Min-Max'>Population Asc</option>
 						<option value='Max-Min'>Population Des</option>
 					</select>
+				</div>
+				<div>
+				<button className={style.srctBtn} onClick={() => homeHandler()}>
+                    Reset
+                </button>
+			</div>
 				
     	</div>
     )
