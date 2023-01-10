@@ -11,6 +11,7 @@
 
     
 .welcome {
+    min-width: fit-content;
     width: auto;
     height: auto;
     max-width: 1280px;

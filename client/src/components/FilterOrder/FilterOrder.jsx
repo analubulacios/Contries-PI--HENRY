@@ -37,9 +37,7 @@ export default function FilterOrder (){
 		dispatch(orderbyPopulation(e.target.value))
 	};
 	
-	function homeHandler () {
-		dispatch(getCountries())
-	};
+	
 	
 	
 
@@ -77,9 +75,7 @@ export default function FilterOrder (){
 					</select>
 				</div>
 				<div>
-				<button className={style.srctBtn} onClick={() => homeHandler()}>
-                    Reset
-                </button>
+				
 			</div>
 				
     	</div>

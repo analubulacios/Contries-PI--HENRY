@@ -20,16 +20,16 @@
 
 
 .button {
-    border: 1px solid #f8f8f8;
-    padding: 10px;
-    background-color: #ffffff;
-    color: #000000;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: "Helvetica", sans-serif;
-    border-radius: 50px;
-    text-align: center;
-    justify-content: center;
+  border: 2px solid #f8f8f8;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Helvetica", sans-serif;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 13px;
   }
   
   .button-principal {

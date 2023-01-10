@@ -23,13 +23,13 @@ export default function CountryDetail () {
     return (
         <>
         <NavBar/>
-        <div>            
+        <div> */aca definir un classnamepara el contenedor del pais */        
         {
-        Object.keys(countryDetail).length  > 0 &&
+        Object.keys(countryDetail).length  > 0 && //tomo de referencia el css de formde creacion classname form fields field 
             (<div className='countryContainer'>
                 <h1>{countryDetail.name}</h1>
                 <h3>{countryDetail.id}</h3>
-                    <div className='imgContainer'>
+                    <div className='imgContainer'> // mas pequeno que mi contenedor principal 
                         <img src={countryDetail.flags} alt='flag img' />
                     </div>
                         <h5>Capital:{countryDetail.capital}</h5>
@@ -40,9 +40,8 @@ export default function CountryDetail () {
             
         }
         </div>
-        <div>
-            {
-            
+        <div> //aca asignar classname para separar las actividades de la card del pais 
+            {           
              countryDetail.activities ? (
                 <div>
                     <h2>Activities:</h2>

@@ -28,8 +28,8 @@ export default function Paginate (){
     return (
         
         <div className='container'>
-            <button className='bton' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(1))} >FIRST</button>
-            <button className='bton' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(currentPage - 1))}>PREV</button>
+            <button className='button' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(1))} >FIRST</button>
+            <button className='button' disabled={currentPage === 1 ? true : false}  onClick={()=>dispatch(setPagination(currentPage - 1))}>PREV</button>
             {page.map((e,index) => (
         <>
             <button
@@ -50,8 +50,8 @@ export default function Paginate (){
           {"  "}
         </>
       ))}
-            <button className='bton' disabled={currentPage === tPages ? true : false} onClick={()=>dispatch(setPagination(currentPage + 1))}>NEXT</button>
-            <button className='bton' disabled={currentPage === tPages ? true : false} onClick={()=>dispatch(setPagination(tPages))}>LAST</button>
+            <button className='button' disabled={currentPage === tPages ? true : false} onClick={()=>dispatch(setPagination(currentPage + 1))}>NEXT</button>
+            <button className='button' disabled={currentPage === tPages ? true : false} onClick={()=>dispatch(setPagination(tPages))}>LAST</button>
             
         </div>
 

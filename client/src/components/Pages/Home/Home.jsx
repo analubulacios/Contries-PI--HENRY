@@ -25,6 +25,10 @@ export default function Home (){
     useEffect(()=>{
         dispatch(getCountries()) //analogo al mapdispatchtoprop
     },[])
+
+    function homeHandler () {
+		dispatch(getCountries())
+	};
    
     // useEffect(()=>{
     //     console.log(indexOfFirstCountries,indexOfLastCountries)
@@ -34,11 +38,14 @@ export default function Home (){
     return (
         <>
         <div className={style.home}>
-            <div className={style.ContainerNavbar}>
+            <div>
                 <NavBar/>
             </div>
             <div className={style.ContainerSearchFilter}>
-                <SearchBar/>   
+                <SearchBar/> 
+                <button className={style.srctBtn} onClick={() => homeHandler()}>
+                    Reset
+                </button>  
                 <FilterOrder/>                   
             </div>
             
@@ -50,7 +57,7 @@ export default function Home (){
                 urlImg={c.flags}
                 name={c.name}
                 continent={c.continent}/>))
-                : <span className={style.error}>ERROR: COUNTRY NOT FOUND</span>
+                : <span className={style.error}>ERROR: Country not found...</span>
                 }
                 </div>
            

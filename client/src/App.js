@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import LandingPage from './components/Pages/LandingPage/LandingPage.jsx';
-import NavBar from './components/NavBar/NavBar.jsx';
 import Home from './components/Pages/Home/Home.jsx';
 import CountryDetail from  './components/Pages/CountryDetail/CountryDetails.jsx';
 import ActivityForm from './components/Pages/ActivityForm/ActivityForm';
