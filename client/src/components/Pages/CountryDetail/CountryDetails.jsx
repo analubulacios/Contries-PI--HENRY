@@ -1,8 +1,9 @@
-import { Fragment, useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getCountrydetail } from "../../../redux/actions";
-import NavBar from "../../NavBar/NavBar";
+import { Fragment, useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getCountrydetail } from '../../../redux/actions';
+import NavBar from '../../NavBar/NavBar';
+import style from './CountryDetail.module.css'
 
 
 
@@ -22,50 +23,52 @@ export default function CountryDetail () {
 
     return (
         <>
-        <NavBar/>
-        <div> */aca definir un classnamepara el contenedor del pais */        
-        {
-        Object.keys(countryDetail).length  > 0 && //tomo de referencia el css de formde creacion classname form fields field 
-            (<div className='countryContainer'>
-                <h1>{countryDetail.name}</h1>
-                <h3>{countryDetail.id}</h3>
-                    <div className='imgContainer'> // mas pequeno que mi contenedor principal 
-                        <img src={countryDetail.flags} alt='flag img' />
-                    </div>
-                        <h5>Capital:{countryDetail.capital}</h5>
-                        <h5>Subregion:{countryDetail.subRegion}</h5>
-                        <h5>Area:{countryDetail.area} Km2</h5>
-                        <h5>Population:{countryDetail.population} Hab. </h5>          
-            </div>)
-            
-        }
-        </div>
-        <div> //aca asignar classname para separar las actividades de la card del pais 
-            {           
-             countryDetail.activities ? (
+            <div className={style.containertotal}>
                 <div>
-                    <h2>Activities:</h2>
-                    {countryDetail.activities.map(e => (
-                        <div>
-                            <h3>Name: {e.name}</h3>
-                            <h3>Difficulty: {e.difficulty}</h3>
-                            <h3>Duration: {e.duration}</h3>
-                            <h3>Season: {e.season}</h3>
-                           
+                    <NavBar/>
+                </div>
+                        <div className={style.countryactivity}>
+                            <div className={style.containercountry}>        
+                                {
+                                Object.keys(countryDetail).length  > 0 && 
+                                    (<div className={style.detail}>
+                                        <h1>{countryDetail.name}</h1>
+                                        
+                                                <img className={style.img} src={countryDetail.flags} alt='flag img'/>
+                                        
+                                                <p>Code: {countryDetail.id}</p>
+                                                <p>Capital: {countryDetail.capital}</p>
+                                                <p>Subregion: {countryDetail.subRegion}</p>
+                                                <p>Area: {countryDetail.area} Km2</p>
+                                                <p>Population: {countryDetail.population} Hab. </p>          
+                                    </div>)                           
+                                }
+                            </div>
+                            <div className={style.containeractivity}> 
+                                {           
+                                    countryDetail.activities ? (
+                                    <div>
+                                        <h2>Avaibable activities:</h2>
+                                                {countryDetail.activities.map(e => (
+                                            <div className={style.detailactivity}key={e.name}>
+                                                
+                                                <p>Name: {e.name}</p>
+                                                <p>Difficulty: {e.difficulty}</p>
+                                                <p>Duration: {e.duration}</p>
+                                                <p>Season: {e.season}</p>
+                                              
+                                            
+                                            </div>
+                                                 ))
+                                                 }
+                                    </div>):
+                                (<div>
+                                    <span>No activities linked...</span>
+                                </div>)                            
+                                }
+                            </div>
                         </div>
-                      ))
-                    }
-                </div>    
-                ):
-                (<div>
-                    <p> No activities linked...  </p>
-
-                </div>)
-             
-                  
-            }
-
-        </div>
+            </div>
         </>
       );
 };
@@ -84,4 +87,3 @@ export default function CountryDetail () {
 
 
 
-// el hook useParams de React Router nos permite acceder desde un componente a los parámetros de la ruta. Para ello, nos devuelve un objeto de claves/valores con los parámetros dinámicos de la URL.

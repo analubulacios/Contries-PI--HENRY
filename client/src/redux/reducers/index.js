@@ -56,8 +56,7 @@ const rootReducer = (state = initialState, action) => {
         };
 
       case GET_COUNTRIES_BY_NAME:
-        //aca va una condicion en la que si el objeto que llega es != voy dejar todo mi estado exactamente = y a error lo cambio a 1. 
-
+         
         return {
           ...state,
           searchCountries: true,

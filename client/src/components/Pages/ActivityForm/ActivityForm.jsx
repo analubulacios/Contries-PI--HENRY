@@ -19,7 +19,7 @@ export default function ActivityForm (){
         dispatch(getCountries()) 
     },[])
     
-    // const[ selected, setSelected ]= useState([]);
+  
     const [ errors, setErrors ] = useState({});
     const [ activity, setActivity ] = useState({
 		name: '',
@@ -72,7 +72,7 @@ export default function ActivityForm (){
             ...activity,
             [e.target.name]: e.target.value
           }))
-        // handleDisable()
+        
     };
 
     const handleSeasons = (e) => {
@@ -87,7 +87,7 @@ export default function ActivityForm (){
               ...activity,
               season: e.target.value
             }))
-        //  handleDisable()
+      
     };
 
     const handleCountries = (e) => {
@@ -97,13 +97,12 @@ export default function ActivityForm (){
             ...activity,
             countries: [...activity.countries, e.target.value]
           })
-        }
-        // if (!selected.includes(e.target.value)){ setSelected(c => [...c,e.target.value])} 
+        }    
         setErrors(validate({
               ...activity,
               countries: [...activity.countries, e.target.value]
             }))
-        // handleDisable() 
+      
     };
       
       
@@ -144,50 +143,52 @@ export default function ActivityForm (){
             <NavBar/>
           </div>  
               <div className={style.containerform}>
-                <h1>Create new Activity:</h1>
+                <h1>Create new activity:</h1>
                     <form onSubmit={e=>handleSubmit(e)}>                      
                         <div className={style.form}>                   
                           <div className={style.fields}>
+
                             <div className={style.field}>
-                              <label>Name:</label>
+                              <label htmlFor='name'>Name:</label>
                                 <input 
                                   autoComplete='off' 
                                   onChange={e=>handleChange(e)} 
                                   type='text' 
                                   name='name' 
                                   value={activity.name}
-                                  placeholder='Activity Name' />
-                                  {errors.name && <div className={style.error}>{errors.name}</div> }
+                                  placeholder='Activity name...' />
+                                  {errors.name && <span> {errors.name}</span> }
                           </div>    
                                    
                           <div className={style.field}>        
-                              <label>Duration (in hours):</label>
+                              <label htmlFor='Duration'>Duration (in hours):</label>
                                 <input
                                   type='text'
                                   name='duration'
                                   value={activity.duration}
                                   onChange={e => handleChange(e)}
                                   autoComplete='off'
-                                  placeholder='Duration Format: 24hs' />
-                                  {errors.duration && <div className={style.error}>{errors.duration}</div>}                       
+                                  placeholder='Duration format: 24hs' />
+                                  {errors.duration && <span>{errors.duration}</span>}                       
                           </div>
                             
                           <div className={style.field}>
-                              <label>Select season:</label>
+                              <label htmlFor='Season'>Select season:</label>
                                 <select
-                                  name="season"                              
+                                  name='Season'                              
                                   onChange={e => handleSeasons(e)}
                                   >
-                                    <option value="Autumn">Autumn</option>
-                                    <option value="Winter">Winter</option>
-                                    <option value="Spring">Spring</option>
-                                    <option value="Summer">Summer</option>   
+                                    <option value='Select'>Select an option</option>
+                                    <option value='Autumn'>Autumn</option>
+                                    <option value='Winter'>Winter</option>
+                                    <option value='Spring'>Spring</option>
+                                    <option value='Summer'>Summer</option>   
                                 </select>
-                                    {errors.season && <div className={style.error}>{errors.season}</div>}             
+                                    {errors.season && <span>{errors.season}</span>}             
                           </div>
                             
                           <div className={style.field}>
-                              <label>Difficulty:</label>
+                              <label htmlFor='Difficulty'>Difficulty:</label>
                                 <input
                                 type='text'
                                 name='difficulty'
@@ -196,33 +197,33 @@ export default function ActivityForm (){
                                 autoComplete='off'
                                 placeholder='Difficulty 1 to 5'
                                 />
-                                {errors.difficulty && <div className={style.error}>{errors.difficulty}</div>}            
+                                {errors.difficulty && <span>{errors.difficulty}</span>}            
                           </div>
                           <div className={style.field} >
-                              <label>Countries:</label>
-                                <select defaultValue={'default'} name="NombrePais" onChange={e=>handleCountries(e)}>
-                                  <option value="default" disabled>Select an option</option>
+                              <label htmlFor='Countries'>Countries:</label>
+                                <select defaultValue={'select'} name='country name' onChange={e=>handleCountries(e)}>
+                                  <option value='select' disabled>Select an option</option>
                                   {countriesList?.map(c=>(
                                     <option value={c.name} key={c.name}>{c.name}</option>
                                   ))}
                                 </select>
-                                  {errors.countries && <div className={style.error}>{errors.countries}</div>}
+                                  {errors.countries && <span>{errors.countries}</span>}
                           </div>
                             
                           <div className={style.displayCountries}>
-                                <h2>Countries Selected:</h2>
+                                <h3>Selected countries:</h3>
                                   {activity.countries.map((country) => {
                                   return (
                                     <div key={country} className={style.country}>
-                                        <p>{country}</p>
+                                        <h2>{country}</h2>
                                     
-                                    <button className={style.btonsecondary} onClick={e => { deleteCountry(country) }}>X</button>
+                                    <button className={style.bttonsec}onClick={e => { deleteCountry(country) }}>X</button>
                                     </div>
                                   )
                                 })}                                            
                             </div>
                             <div>
-                              <button
+                              <button className={style.bttonprim}
                                 type='submit'            
                                 disabled={Object.keys(errors).length !== 0 || !isModified} >Add Activity</button>
                             </div>                            

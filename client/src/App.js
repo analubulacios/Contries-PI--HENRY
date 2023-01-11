@@ -12,7 +12,7 @@ function App() {
       <Route exact path='/home' component={Home}/>
       <Route exact path='/country/:idPais' component={CountryDetail}/>
       <Route exact path='/activity' component={ActivityForm}/>
-      {/* <Route path ='*' /> */}
+      <Route path ='*' />
 	  </Switch>
   )
 };
