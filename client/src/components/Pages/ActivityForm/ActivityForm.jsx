@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getCountries, addActivity } from '../../../redux/actions/index';
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../../NavBar/NavBar";
@@ -28,7 +28,8 @@ export default function ActivityForm (){
 		season: '',
 		countries: [],});
     const [isModified,setisModified] = useState(false);
-
+    const refCountry = useRef()
+    const refSeason = useRef()
     
 
 	const validate = (activity) => {
@@ -119,8 +120,6 @@ export default function ActivityForm (){
           }))
       
     };
-
-  
     
     const handleSubmit = (e) => {
 		  e.preventDefault()
@@ -134,6 +133,9 @@ export default function ActivityForm (){
             countries: []
 
         })
+      setisModified(false);
+      refCountry.current.selectedIndex = 0;
+      refSeason.current.selectedIndex = 0;
 	};
          
     return (
@@ -149,7 +151,7 @@ export default function ActivityForm (){
                           <div className={style.fields}>
 
                             <div className={style.field}>
-                              <label htmlFor='name'>Name:</label>
+                              <p>Name:</p>
                                 <input 
                                   autoComplete='off' 
                                   onChange={e=>handleChange(e)} 
@@ -158,10 +160,10 @@ export default function ActivityForm (){
                                   value={activity.name}
                                   placeholder='Activity name...' />
                                   {errors.name && <span> {errors.name}</span> }
-                          </div>    
+                          </div>  
                                    
                           <div className={style.field}>        
-                              <label htmlFor='Duration'>Duration (in hours):</label>
+                              <p>Duration (in hours):</p>
                                 <input
                                   type='text'
                                   name='duration'
@@ -173,11 +175,12 @@ export default function ActivityForm (){
                           </div>
                             
                           <div className={style.field}>
-                              <label htmlFor='Season'>Select season:</label>
+                              <p>Select season:</p>
                                 <select
                                   defaultValue={'Select'}
                                   name='Season'                              
                                   onChange={e => handleSeasons(e)}
+                                  ref={refSeason}
                                   >
                                     <option value='Select' disabled>Select an option</option>
                                     <option value='Autumn'>Autumn</option>
@@ -189,7 +192,7 @@ export default function ActivityForm (){
                           </div>
                             
                           <div className={style.field}>
-                              <label htmlFor='Difficulty'>Difficulty:</label>
+                              <p>Difficulty:</p>
                                 <input
                                 type='text'
                                 name='difficulty'
@@ -201,8 +204,8 @@ export default function ActivityForm (){
                                 {errors.difficulty && <span>{errors.difficulty}</span>}            
                           </div>
                           <div className={style.field} >
-                              <label htmlFor='Countries'>Countries:</label>
-                                <select defaultValue={'select'} name='country name' onChange={e=>handleCountries(e)}>
+                              <p> Select countries:</p>
+                                <select defaultValue={'select'} name='country name' onChange={e=>handleCountries(e)} ref={refCountry}>
                                   <option value='select' disabled>Select an option</option>
                                   {countriesList?.map(c=>(
                                     <option value={c.name} key={c.name}>{c.name}</option>
@@ -210,16 +213,15 @@ export default function ActivityForm (){
                                 </select>
                                   {errors.countries && <span>{errors.countries}</span>}
                           </div>
-                            
+                          <p className={style.listCountries}> Countries:</p>
                           <div className={style.displayCountries}>
-                                <h4>Selected countries:</h4>
+                               
                                   {activity.countries.map((country) => {
-                                  return (
+                                  return ( 
                                     <div key={country} className={style.country}>
-                                        <h2>{country}</h2>
-                                    
-                                    <button className={style.bttonsec}onClick={e => { deleteCountry(country) }}>X</button>
-                                    </div>
+                                      <p>{country}</p>                                                                             
+                                      <button className={style.bttonsec}onClick={e => { deleteCountry(country) }}>✕</button>
+                                    </div>         
                                   )
                                 })}                                            
                             </div>

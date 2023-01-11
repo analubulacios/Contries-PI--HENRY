@@ -27,46 +27,67 @@
     font-size: 26px;
 }
 .form{
-    width: 650px;
+    width: 380px;
+    height: auto;
+    padding: 22px;
+    text-align: left;
+    margin: 0 auto;
     border: 3px solid var(--border-color);
     border-radius: 3rem;
     background-color: #00000090;
+    
    
 }
 
 
 .fields{
-    position: relative;
-    width: 350px;
-    max-height: 100vh;
-    margin-bottom: 20px;   
-    left: 75px;
+   margin: 15px;
+
    }
 
 
 .field{
     font-size: 17px;
     font-weight: 600;
-    margin:1px 0;
+    margin:14px 0;
+    width: 300px;
    
    }
 
 .field >input{
     margin: 15px;
-    padding: 2px;
+    padding: 5px;
+    border: solid 1px #ccc;
+    width: 300px;
+    border-radius: 4px;
+}
+.field >input:focus{
+    border:3px solid var(--border-color);;
 }
 
-.field >label{
+.field >p{
     color: white;
+    font: 17px
+    ;
 }
+
 .field > select{
-    font-size: 17px;
-    padding: 3px;
-    width: 93%;
+    margin: 15px;
+    padding: 7px;
+    border: solid 1px #ccc;
+    width: 311px;
+    border-radius: 4px;
+
+}
+
+.field >select:focus{
+    border:3px solid var(--border-color);;
 }
 
 .field > select > option{
     color: white;
+
+
     
 }
 
@@ -78,9 +99,69 @@
     position: relative;
     left: 10px;
 }
-/* .bttonsec{
+
+.displayCountries {
+    display: flex;
+    width: 300px;
+    height: auto;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.listCountries{
+    margin-bottom: 5px;
+
+    color: white;
+    font: 17px;
+    display: block;
 
 }
-.bttonprim{
 
-} */
+.country{
+    display: flex;
+    gap:8px;
+    width: auto;
+
+}
+
+.bttonsec{ 
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+
+}
+
+
+
+.bttonprim{
+    margin: 15px;
+    padding: 7px;
+    border: solid 1px #ccc;
+    width: 311px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.bttonprim {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+.bttonprim:hover {
+  
+    transition-duration: 0.3s;
+    background-color: #00000090;
+    color: white;
+  }
+
+.bttonprim[disabled],.bttonprim:hover[disabled]{
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+
+}
