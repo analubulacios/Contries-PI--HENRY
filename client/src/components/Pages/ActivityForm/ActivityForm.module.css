@@ -16,23 +16,18 @@
 } 
 
 .containerform {
-    margin: 60px 0 0 0;
+    margin: 25px 0 0 0;
 
 
 }
 .containerform >h1{
-    margin-bottom: 25px;
+    margin-bottom: 24px;
     position: relative;
-    left: 45px;
+    left: 32px;
+    font-size: 26px;
 }
 .form{
     width: 650px;
-    position: relative;
-    left: 0;
-    right: 0;
-    grid-template-columns: repeat(auto-fit, minmax(42rem, 1fr));
-    grid-column-gap: 5rem;
-    justify-items: center;
     border: 3px solid var(--border-color);
     border-radius: 3rem;
     background-color: #00000090;
@@ -50,11 +45,30 @@
 
 
 .field{
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
-    margin:20px 0;
+    margin:1px 0;
    
    }
+
+.field >input{
+    margin: 15px;
+    padding: 2px;
+}
+
+.field >label{
+    color: white;
+}
+.field > select{
+    font-size: 17px;
+    padding: 3px;
+    width: 93%;
+}
+
+.field > select > option{
+    color: white;
+    
+}
 
 .field > span{
     font-size: 16px;
@@ -64,3 +78,9 @@
     position: relative;
     left: 10px;
 }
+/* .bttonsec{
+
+}
+.bttonprim{
+
+} */

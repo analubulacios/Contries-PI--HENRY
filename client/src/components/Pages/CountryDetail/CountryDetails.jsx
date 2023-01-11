@@ -44,11 +44,14 @@ export default function CountryDetail () {
                                     </div>)                           
                                 }
                             </div>
-                            <div className={style.containeractivity}> 
-                                {           
-                                    countryDetail.activities ? (
-                                    <div>
+                            <div className={style.containeractivities}> 
+                                    <div className={style.titleactivity}>
                                         <h2>Avaibable activities:</h2>
+                                    </div>
+                                {            
+                                    countryDetail.activities ? (
+                                    <div className={style.containeractivity}>
+                                       
                                                 {countryDetail.activities.map(e => (
                                             <div className={style.detailactivity}key={e.name}>
                                                 

@@ -28,7 +28,8 @@
 }
 
 .btonexplore{
-    font-family:'Roboto Condensed', sans-serif;
+    /* font-family:'Roboto Condensed', sans-serif; */
+    font-family: 'Lato', sans-serif;
     box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background-color:transparent;
 	border-radius:15px;

@@ -175,10 +175,11 @@ export default function ActivityForm (){
                           <div className={style.field}>
                               <label htmlFor='Season'>Select season:</label>
                                 <select
+                                  defaultValue={'Select'}
                                   name='Season'                              
                                   onChange={e => handleSeasons(e)}
                                   >
-                                    <option value='Select'>Select an option</option>
+                                    <option value='Select' disabled>Select an option</option>
                                     <option value='Autumn'>Autumn</option>
                                     <option value='Winter'>Winter</option>
                                     <option value='Spring'>Spring</option>
@@ -211,7 +212,7 @@ export default function ActivityForm (){
                           </div>
                             
                           <div className={style.displayCountries}>
-                                <h3>Selected countries:</h3>
+                                <h4>Selected countries:</h4>
                                   {activity.countries.map((country) => {
                                   return (
                                     <div key={country} className={style.country}>
