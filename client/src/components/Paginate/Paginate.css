@@ -26,7 +26,7 @@
   color: #000000;
   text-decoration: none;
   text-transform: uppercase;
-  font-family: "Helvetica", sans-serif;
+  font-family: lato, sans-serif;
   border-radius: 5px;
   text-align: center;
   font-size: 13px;
@@ -36,7 +36,7 @@
     border: 1px solid #f7f7f7;
     padding: 15px;
     font-size: 19px;
-    background-color: #020202;
+    background-color: #00000040;;
     color: #f8f8f8;
     text-decoration: none;
     text-transform: uppercase;

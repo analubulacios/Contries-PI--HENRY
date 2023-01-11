@@ -1,0 +1,27 @@
+.inputsContainer, .inputsContainer form{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100vp;
+    margin: 10px auto;
+}
+
+.inputText{
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 15px;
+    padding-left: 55px;
+}
+
+.srctBtn{
+
+    border: 1px solid #f7f7f7;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: #00000040;
+    color: white;
+    width: 80px;
+    font-size: 15px;
+    font-weight: 700;
+
+}

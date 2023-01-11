@@ -125,25 +125,25 @@
 }
 
 .bttonsec{ 
-    background-color: white;
-    color: black;
+    background-color: #00000040;
+    color: #ffb703;
+    border: 2px solid #ffb703;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     text-align: center;
     line-height: 24px;
-
+   
 }
-
 
 
 .bttonprim{
     margin: 15px;
     padding: 7px;
-    border: solid 1px #ccc;
+    border: solid 3px  #ffb703;
     width: 311px;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
 }
 

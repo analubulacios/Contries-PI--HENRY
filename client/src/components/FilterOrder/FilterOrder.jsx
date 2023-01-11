@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByActivity, filterByContinent,  getCountries, orderByName, orderbyPopulation } from '../../redux/actions';
 import style from './FilterOrder.module.css';

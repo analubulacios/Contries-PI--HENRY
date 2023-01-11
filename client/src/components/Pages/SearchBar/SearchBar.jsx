@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCountryByName, getCountries } from '../../../redux/actions';
-import './SearchBar.css';
+import style from './SearchBar.module.css';
 
 
 export default function SearchBar() {
@@ -24,19 +24,19 @@ export default function SearchBar() {
 
     return (
         <div>
-            <div className='inputsContainer'>
-                <form onSubmit={onClickHandler}>
+            <div className={style.inputsContainer}>
+                <form  onSubmit={onClickHandler}>
                     <input
-                        className='inputText'
+                        className={style.inputText}
                         type='text'
                         placeholder='Search by name'
                         name='input'
                         value={input}
-                        autocomplete='off'
+                        autoComplete='off'
                         onChange={(e) => inputHandler(e)}
                     />
                     <div>
-                        <button className='srctBtn' type='submit' >
+                        <button className={style.srctBtn} type='submit' >
                             Search
                         </button>
                     </div>

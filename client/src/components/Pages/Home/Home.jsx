@@ -14,30 +14,28 @@ import NavBar from '../../NavBar/NavBar';
 export default function Home (){
 
     
-    const allCountries = useSelector((state)=>state.countries); // analogo al mapstatetoprop y guardado en una constante ...
+    const allCountries = useSelector((state)=>state.countries); 
     const currentPage = useSelector ((state)=> state.currentPage);
     const indexOfFirstCountries = useSelector((state)=>state.indexOfFirstCountries);
     const indexOfLastCountries = useSelector((state)=>state.indexOfLastCountries);
     const search = useSelector((state)=> state.searchCountries);
     
-    const dispatch = useDispatch(); // guardo funcion dispatch en constante para despachar las acciones...
-    // traemos los countries cuando el componente se monta..
+    const dispatch = useDispatch(); 
     useEffect(()=>{
-        dispatch(getCountries()) //analogo al mapdispatchtoprop
+        dispatch(getCountries()) 
     },[])
 
     function homeHandler () {
 		dispatch(getCountries())
 	};
    
-    // useEffect(()=>{
-    //     console.log(indexOfFirstCountries,indexOfLastCountries)
-    // }, [currentPage])
+    
    
     const currentCountries = allCountries.slice(currentPage == 1 ? 0 :indexOfFirstCountries, search === false && currentPage == 1 ? 9 :indexOfLastCountries);
     return (
         <>
         <div className={style.home}>
+    
             <div>
                 <NavBar/>
             </div>
@@ -51,6 +49,7 @@ export default function Home (){
             
                 <div className={style.CardsCountries}>  
                 {
+      
                 currentCountries.length > 0 ? currentCountries.map((c) => (<CountryCard
                 idPais={c.id}
                 key = {c.id}
@@ -58,7 +57,9 @@ export default function Home (){
                 name={c.name}
                 continent={c.continent}/>))
                 : <span className={style.error}>ERROR: Country not found...</span>
+               
                 }
+        
                 </div>
            
             <div>
@@ -71,9 +72,6 @@ export default function Home (){
 
 
 
-
-//mapstatetoprop conecta los componentes con los estados globales
-//mapdispatchtoprop conecta los componentes con la capacidad de llegar al reducer
 
 
  

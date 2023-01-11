@@ -165,7 +165,7 @@ export default function ActivityForm (){
                           <div className={style.field}>        
                               <p>Duration (in hours):</p>
                                 <input
-                                  type='text'
+                                  type='number'
                                   name='duration'
                                   value={activity.duration}
                                   onChange={e => handleChange(e)}
@@ -194,7 +194,7 @@ export default function ActivityForm (){
                           <div className={style.field}>
                               <p>Difficulty:</p>
                                 <input
-                                type='text'
+                                type='number'
                                 name='difficulty'
                                 value={activity.difficulty}
                                 onChange={e => handleChange(e)}
